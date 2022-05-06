@@ -1,0 +1,65 @@
+.page:target {
+  display: block;
+}
+
+.page:not(:target) {
+  display: none;
+}
+
+.initialize-page {
+  display: none;
+}
+
+.previous-page,
+.next-page {
+  color: blue;
+}
+
+.previous-page[more_pages="false"],
+.next-page[more_pages="false"] {
+  pointer-events: none;
+  text-decoration: none;
+  color: black;
+}
+
+span.image:hover::after {
+  padding-left: 0.5rem;
+  position: absolute;
+  background-color: blue;
+  display: inline-block;
+  padding: 0.3rem;
+  border-radius: 20%;
+  color: white;
+}
+span.image.global-modifier-information:hover::after {
+  content: "When you use the '/g', global modifier, all matches are returned. If not, only the first match is returned.";
+}
+
+span.image.case-insensitive-modifier-information:hover::after {
+  content: "When you use the '/i', case insensitive modifier, matches are made without regard to case.";
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.row > * {
+  padding-right: 1rem;
+}
+
+.navigation {
+  font-size: larger;
+  border-bottom: solid;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+label {
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+
+li {
+  padding-bottom: 0.5rem;
+}

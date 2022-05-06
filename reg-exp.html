@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/paginator-script.js"></script>
+  </head>
+  <body>
+    <div class="row navigation">
+      <a href="#p1" class="initial-page"></a>
+      <a href="#p0" more_pages="false" class="previous-page">Previous Page</a>
+      <a href="#p1" more_pages="true" class="next-page">Next Page</a>
+    </div>
+    <div>
+      <label for="test-string-1">Test String 1:</label>
+      <input type="text" id="test-string-1" />
+      <span type="text" id="test-result-1"></span>
+    </div>
+    <div>
+      <label for="test-string-2">Test String 2:</label>
+      <input type="text" id="test-string-2" />
+      <span type="text" id="test-result-2"></span>
+    </div>
+    <div>
+      <label for="global-match">Global Match:</label>
+      <input type="checkbox" id="global-match" />
+      <span class="image global-modifier-information"
+        ><img
+          src="images/information-icon.png"
+          alt="Global Modifier Information"
+      /></span>
+    </div>
+    <div>
+      <label for="case-insensitive-match">Case Insensitive Match:</label>
+      <input type="checkbox" id="case-insensitive-match" />
+      <span class="image case-insensitive-modifier-information"
+        ><img
+          src="images/information-icon.png"
+          alt="Global Modifier Information"
+      /></span>
+    </div>
+    <div class="page">
+      <h1>Page #<span class="page-number"></span>: Introduction</h1>
+      <p>
+        See
+        <a
+          target="_blank"
+          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions"
+          >this</a
+        >
+        and
+        <a
+          target="_blank"
+          href="https://www.tutorialspoint.com/javascript_regexp/index.htm"
+          >this</a
+        >
+        for information about regular expressions in JavaScript.
+      </p>
+      <p>
+        Together, these two sources should provide everything necessary to
+        establilsh a moderate level of expertise in regular expressions.
+      </p>
+    </div>
+    <div class="page">
+      <h1>Page #<span class="page-number"></span>: Brackets</h1>
+      <ul>
+        <li>
+          <span>
+            [...] checks if any <u>one</u> character between the brackets is
+            present in the searched string.
+          </span>
+          Enter something to go inside the brackets here:
+        </li>
+        <li>
+          [^...] checks if any one character between the brackets is not present
+          in the searched string.
+        </li>
+      </ul>
+      <input type="text" class="bracket1" />
+      <button onclick="ApplyRegExp(document.querySelector('.bracket1').value)">
+        Apply pattern
+      </button>
+    </div>
+    <div class="page">
+      <h1>Page #<span class="page-number"></span>: Quantifiers</h1>
+      <ul>
+        <li>p* matches any string containing zero or more p's.</li>
+      </ul>
+    </div>
+    <div class="page">
+      <h1>Page #<span class="page-number"></span>: Matching Characters</h1>
+    </div>
+    <div class="page">
+      <h1>Page #<span class="page-number"></span>: Literal Characters</h1>
+    </div>
+    <div class="page">
+      <h1>Page #<span class="page-number"></span>: Meta Characters</h1>
+    </div>
+    <div class="page">
+      <h1>Page #<span class="page-number"></span>: Modifiers</h1>
+    </div>
+    <div class="page">
+      <h1>Page #<span class="page-number"></span>: Properties</h1>
+    </div>
+    <div class="page">
+      <h1>Page #<span class="page-number"></span>: Methods</h1>
+    </div>
+    <div class="page">
+      <h1>
+        Page #<span class="page-number"></span>: JavaScript RegExp Useful
+        Resources
+      </h1>
+    </div>
+    <script>
+      function ApplyRegExp(exp) {
+        var modifiers = "";
+        if (document.querySelector("#global-match").checked) {
+          modifiers += "g";
+        }
+        if (document.querySelector("#case-insensitive-match").checked) {
+          modifiers += "i";
+        }
+        exp = RegExp(exp, modifiers);
+        if (document.querySelector("#test-string-1")) {
+          document.querySelector("#test-result-1").innerText = document
+            .querySelector("#test-string-1")
+            .value.match(exp);
+        }
+        if (document.querySelector("#test-string-2")) {
+          document.querySelector("#test-result-2").innerText = document
+            .querySelector("#test-string-2")
+            .value.match(exp);
+        }
+      }
+    </script>
+  </body>
+</html>
