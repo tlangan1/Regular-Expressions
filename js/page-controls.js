@@ -25,6 +25,21 @@ function onLoad(event) {
     .querySelector(".next-page")
     .addEventListener("click", onNextPageClick);
 
+  var toggleExperiment = returnToggleExperiment();
+
+  // I need to close over the same function object, toggleExperiment, here and in nonWordBoundaryExample below
+  document
+    .querySelector("button.experiment")
+    .addEventListener("click", toggleExperiment);
+
+  document
+    .querySelector("#non-word-boundary-example-1")
+    .addEventListener("click", nonWordBoundaryExample("\\Bad"));
+
+  document
+    .querySelector("#non-word-boundary-example-2")
+    .addEventListener("click", nonWordBoundaryExample("ad\\B"));
+
   // --------------------------------------------------
   // The helper functions for the executable code above
 
@@ -64,5 +79,43 @@ function onLoad(event) {
         "more_pages"
       ].value = false;
     }
+  }
+
+  function returnToggleExperiment() {
+    var visible = false;
+
+    function toggleExperiment(e, show) {
+      if (show) {
+        visible = false;
+      }
+      if (visible) {
+        document.querySelector("div.experiment").attributes["class"].value +=
+          " hidden";
+        document.querySelector("button.experiment").innerText = "Do Experiment";
+      } else {
+        document.querySelector("div.experiment").attributes["class"].value =
+          document
+            .querySelector("div.experiment")
+            .attributes["class"].value.replace("hidden", "");
+        document.querySelector("button.experiment").innerText =
+          "Hide Experiment";
+      }
+      visible = !visible;
+    }
+
+    return toggleExperiment;
+  }
+
+  function nonWordBoundaryExample(pattern) {
+    function specificNonWordBoundaryExample() {
+      document.querySelector("#test-string-1").value = "bad";
+      document.querySelector("#test-string-2").value = "advice";
+      document.querySelector(".pattern").value = pattern;
+      // I need to close over the same function object, toggleExperiment, here and in the addEventListener above
+      // however, I need to override the toggle.  Regardless of which state it is in I need is to become visible.
+      toggleExperiment(event, true);
+    }
+
+    return specificNonWordBoundaryExample;
   }
 }
