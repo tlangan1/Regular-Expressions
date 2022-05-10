@@ -8,239 +8,230 @@
 
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/page-controls.js"></script>
+    <script src="js/reg-exp.js"></script>
   </head>
   <body>
     <div class="row navigation">
       <a href="#p1" class="initial-page"></a>
       <a href="#p0" more_pages="false" class="previous-page">Previous Page</a>
       <a href="#p1" more_pages="true" class="next-page">Next Page</a>
-    </div>
-    <div class="row">
       <button class="experiment">Do Experiment</button>
-      <span class="image experiment-button-information"
-        ><img
+      <span class="hover-information">
+        <img
           src="images/information-icon.png"
           alt="Experiment Button Information"
-      /></span>
+        />
+        <span class="hidden">
+          Click this button to experiment with regular expression patterns on
+          target strings.
+        </span>
+      </span>
       <span class="image pseudo-element-accessibility-information"
         ><img
           src="images/information-icon.png"
           alt="Pseudo Element Accessibility Information"
       /></span>
     </div>
-    <div class="center-container hidden experiment">
-      <div>
-        <label for="test-string-1">Test String 1:</label>
-        <input type="text" id="test-string-1" />
-        <label for="test-result-1">Test Result 1:</label>
-        <span class="result" id="test-result-1"></span>
-      </div>
-      <div>
-        <label for="test-string-2">Test String 2:</label>
-        <input type="text" id="test-string-2" />
-        <label for="test-result-2">Test Result 2:</label>
-        <span class="result" id="test-result-2"></span>
-      </div>
-      <div>
-        <label for="test-multi-line-string">Test Multi-line String:</label>
-        <textarea rows="3" id="test-multi-line-string"></textarea>
-        <label for="test-multi-line-result">Test Multi-Line Result:</label>
-        <span class="result" id="test-multi-line-result"></span>
-      </div>
-      <div>
-        <label for="global-match">Global Match:</label>
-        <input type="checkbox" id="global-match" />
-        <span class="image global-modifier-information"
-          ><img
-            src="images/information-icon.png"
-            alt="Global Modifier Information"
-        /></span>
-      </div>
-      <div>
-        <label for="case-insensitive-match">Case Insensitive Match:</label>
-        <input type="checkbox" id="case-insensitive-match" />
-        <span class="image case-insensitive-modifier-information"
-          ><img
-            src="images/information-icon.png"
-            alt="Global Modifier Information"
-        /></span>
-      </div>
-      <label for="bracket">Pattern:</label>
-      <input type="text" class="pattern" />
-      <span class="new-line">
-        Enter the pattern as a string not as a regular expression literal. That
-        is, do NOT begin and end the pattern with a "/" forward slash.
-      </span>
-      <div class="center-contents">
-        <button onclick="ApplyRegExp(document.querySelector('.pattern').value)">
-          Apply pattern
-        </button>
-      </div>
-    </div>
-    <div class="page">
-      <h1>Page #<span class="page-number"></span>: Introduction</h1>
-      <p>
-        See
-        <a
-          target="_blank"
-          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions"
-          >MDN</a
-        >
-        for information about regular expressions in JavaScript.
-      </p>
-    </div>
-    <div class="page">
-      <h1>Page #<span class="page-number"></span>: Brackets</h1>
-      <h2 class="warning">This section may eventually be removed</h2>
-      <ul>
-        <li>
-          <span>
-            [...] checks if any <u>one</u> character between the brackets is
-            present in the searched string.
+    <main class="row">
+      <article>
+        <div class="page">
+          <h1>Page #<span class="page-number"></span>: Introduction</h1>
+          <p>
+            See
+            <a
+              target="_blank"
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions"
+              >MDN</a
+            >
+            for information about regular expressions in JavaScript.
+          </p>
+        </div>
+        <div class="page">
+          <h1>Page #<span class="page-number"></span>: Brackets</h1>
+          <h2 class="warning">This section may eventually be removed</h2>
+          <ul>
+            <li>
+              <span>
+                [...] checks if any <u>one</u> character between the brackets is
+                present in the searched string.
+              </span>
+              Enter something to go inside the brackets here:
+            </li>
+            <li>
+              [^...] checks if any <u>one</u> character between the brackets is
+              not present in the searched string.
+            </li>
+            <li>[0-9] matches any decimal digit from 0 through 9.</li>
+            <li>
+              [a-z] matches any character from lowercase a through lowercase z.
+            </li>
+            <li>
+              [A-Z] matches any character from uppercase A through uppercase Z.
+            </li>
+            <li>
+              [a-zA-Z] matches any character from lowercase a through uppercase
+              Z.
+            </li>
+          </ul>
+        </div>
+        <div class="page">
+          <h1>Page #<span class="page-number"></span>: Assertions</h1>
+          <ul>
+            <li>
+              "^" matches the beginning of input. The pattern to match must
+              appear
+              <u>after</u> the caret symbol as in "^a".
+              <p>
+                If the multiline flag, '/m', is used, then it also applies
+                immediately <u>after</u> a line break. Note that the caret
+                symbol, '^', means negation when used at the start of a range.
+              </p>
+            </li>
+            <li>
+              "$" matches the end of input. The pattern to match must appear
+              <u>before</u>
+              the caret symbol as in "a$".
+              <p>
+                If the multiline flag, "/m", is used, then it also applies
+                immediately <u>before</u> a line break.
+              </p>
+            </li>
+            <li>
+              "\b" matches a word boundary. This is the position where a word
+              character is not followed or preceded by another word-character.
+              <p>
+                To be precise, \b[pattern] will match a word starting pattern
+                whereas [pattern]\b will match a word ending pattern
+              </p>
+            </li>
+            <li>
+              "\B" matches a non-word boundary. This is a position where the
+              previous and next character are of the same type: Either both must
+              be words, or both must be non-words.
+              <p>
+                To be precise, \B[pattern] will require that the beginning of
+                the pattern be at a non-word boudary whereas [pattern]\B will
+                require that the end of the pattern be at a non-word boundary.
+                Compare this example,
+                <button id="non-word-boundary-example-1">Example 1</button> to
+                this example,
+                <button id="non-word-boundary-example-2">Example 2</button>.
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="page">
+          <h1>Page #<span class="page-number"></span>: Quantifiers</h1>
+          <ul>
+            <li>
+              p+ matches any string containing one or more p's. p+ is equivalent
+              to p{1,}
+            </li>
+            <li>
+              p* matches any string containing zero or more p's. One might
+              conclude that p* will match everything because of the "zero"
+              reference, but that is not the case.
+            </li>
+            <li>p? matches any string containing zero or one p's.</li>
+            <li>p{N} matches any string containing a sequence of N p's.</li>
+            <li>
+              p{N1, N2} matches any string containing a sequence of N1 or N2
+              p's.
+            </li>
+            <li>
+              p{N,} matches any string containing at least a sequence of N p's.
+              Note that the "," cannot be followed by any white space.
+            </li>
+            <li>p$ matches any string containing p at the end of it.</li>
+            <li>^p matches any string containing p at the start of it.</li>
+          </ul>
+        </div>
+        <div class="page">
+          <h1>Page #<span class="page-number"></span>: Matching Characters</h1>
+        </div>
+        <div class="page">
+          <h1>Page #<span class="page-number"></span>: Literal Characters</h1>
+        </div>
+        <div class="page">
+          <h1>Page #<span class="page-number"></span>: Meta Characters</h1>
+        </div>
+        <div class="page">
+          <h1>Page #<span class="page-number"></span>: Modifiers</h1>
+        </div>
+        <div class="page">
+          <h1>Page #<span class="page-number"></span>: Properties</h1>
+        </div>
+        <div class="page">
+          <h1>Page #<span class="page-number"></span>: Methods</h1>
+        </div>
+        <div class="page">
+          <h1>
+            Page #<span class="page-number"></span>: JavaScript RegExp Useful
+            Resources
+          </h1>
+        </div>
+      </article>
+      <aside class="center-container hidden experiment">
+        <div>
+          <label for="test-string-1">Test String 1:</label>
+          <input type="text" id="test-string-1" />
+          <label for="test-result-1">Test Result 1:</label>
+          <span class="result" id="test-result-1"></span>
+        </div>
+        <div>
+          <label for="test-string-2">Test String 2:</label>
+          <input type="text" id="test-string-2" />
+          <label for="test-result-2">Test Result 2:</label>
+          <span class="result" id="test-result-2"></span>
+        </div>
+        <div>
+          <label for="test-multi-line-string">Test Multi-line String:</label>
+          <textarea rows="3" id="test-multi-line-string"></textarea>
+          <label for="test-multi-line-result">Test Multi-Line Result:</label>
+          <span class="result" id="test-multi-line-result"></span>
+        </div>
+        <div>
+          <label for="global-match">Global Match:</label>
+          <input type="checkbox" id="global-match" />
+          <span class="hover-information">
+            <img
+              src="images/information-icon.png"
+              alt="Global Modifier Information"
+            />
+            <span class="hidden">
+              When you use the '/g', global modifier, all matches are returned.
+              If not, only the first match is returned.
+            </span>
           </span>
-          Enter something to go inside the brackets here:
-        </li>
-        <li>
-          [^...] checks if any <u>one</u> character between the brackets is not
-          present in the searched string.
-        </li>
-        <li>[0-9] matches any decimal digit from 0 through 9.</li>
-        <li>
-          [a-z] matches any character from lowercase a through lowercase z.
-        </li>
-        <li>
-          [A-Z] matches any character from uppercase A through uppercase Z.
-        </li>
-        <li>
-          [a-zA-Z] matches any character from lowercase a through uppercase Z.
-        </li>
-      </ul>
-    </div>
-    <div class="page">
-      <h1>Page #<span class="page-number"></span>: Assertions</h1>
-      <ul>
-        <li>
-          "^" matches the beginning of input. The pattern to match must appear
-          <u>after</u> the caret symbol as in "^a".
-          <p>
-            If the multiline flag, '/m', is used, then it also applies
-            immediately <u>after</u> a line break. Note that the caret symbol,
-            '^', means negation when used at the start of a range.
-          </p>
-        </li>
-        <li>
-          "$" matches the end of input. The pattern to match must appear
-          <u>before</u>
-          the caret symbol as in "a$".
-          <p>
-            If the multiline flag, "/m", is used, then it also applies
-            immediately <u>before</u> a line break.
-          </p>
-        </li>
-        <li>
-          "\b" matches a word boundary. This is the position where a word
-          character is not followed or preceded by another word-character.
-          <p>
-            To be precise, \b[pattern] will match a word starting pattern
-            whereas [pattern]\b will match a word ending pattern
-          </p>
-        </li>
-        <li>
-          "\B" matches a non-word boundary. This is a position where the
-          previous and next character are of the same type: Either both must be
-          words, or both must be non-words.
-          <p>
-            To be precise, \B[pattern] will require that the beginning of the
-            pattern be at a non-word boudary whereas [pattern]\B will require
-            that the end of the pattern be at a non-word boundary. Compare this
-            example,
-            <button id="non-word-boundary-example-1">Example 1</button> to this
-            example,
-            <button id="non-word-boundary-example-2">Example 2</button>.
-          </p>
-        </li>
-      </ul>
-    </div>
-    <div class="page">
-      <h1>Page #<span class="page-number"></span>: Quantifiers</h1>
-      <ul>
-        <li>
-          p+ matches any string containing one or more p's. p+ is equivalent to
-          p{1,}
-        </li>
-        <li>
-          p* matches any string containing zero or more p's. One might conclude
-          that p* will match everything because of the "zero" reference, but
-          that is not the case.
-        </li>
-        <li>p? matches any string containing zero or one p's.</li>
-        <li>p{N} matches any string containing a sequence of N p's.</li>
-        <li>
-          p{N1, N2} matches any string containing a sequence of N1 or N2 p's.
-        </li>
-        <li>
-          p{N,} matches any string containing at least a sequence of N p's. Note
-          that the "," cannot be followed by any white space.
-        </li>
-        <li>p$ matches any string containing p at the end of it.</li>
-        <li>^p matches any string containing p at the start of it.</li>
-      </ul>
-    </div>
-    <div class="page">
-      <h1>Page #<span class="page-number"></span>: Matching Characters</h1>
-    </div>
-    <div class="page">
-      <h1>Page #<span class="page-number"></span>: Literal Characters</h1>
-    </div>
-    <div class="page">
-      <h1>Page #<span class="page-number"></span>: Meta Characters</h1>
-    </div>
-    <div class="page">
-      <h1>Page #<span class="page-number"></span>: Modifiers</h1>
-    </div>
-    <div class="page">
-      <h1>Page #<span class="page-number"></span>: Properties</h1>
-    </div>
-    <div class="page">
-      <h1>Page #<span class="page-number"></span>: Methods</h1>
-    </div>
-    <div class="page">
-      <h1>
-        Page #<span class="page-number"></span>: JavaScript RegExp Useful
-        Resources
-      </h1>
-    </div>
-    <script>
-      function ApplyRegExp(exp) {
-        var modifiers = "";
-        if (document.querySelector("#global-match").checked) {
-          modifiers += "g";
-        }
-        if (document.querySelector("#case-insensitive-match").checked) {
-          modifiers += "i";
-        }
-        if (document.querySelector("#test-multi-line-string")) {
-          modifiers += "m";
-        }
-
-        exp = RegExp(exp, modifiers);
-
-        if (document.querySelector("#test-string-1")) {
-          document.querySelector("#test-result-1").innerText = document
-            .querySelector("#test-string-1")
-            .value.match(exp);
-        }
-        if (document.querySelector("#test-string-2")) {
-          document.querySelector("#test-result-2").innerText = document
-            .querySelector("#test-string-2")
-            .value.match(exp);
-        }
-        if (document.querySelector("#test-multi-line-string")) {
-          document.querySelector("#test-multi-line-result").innerText = document
-            .querySelector("#test-multi-line-string")
-            .value.match(exp);
-        }
-      }
-    </script>
+        </div>
+        <div>
+          <label for="case-insensitive-match">Case Insensitive Match:</label>
+          <input type="checkbox" id="case-insensitive-match" />
+          <span class="hover-information">
+            <img
+              src="images/information-icon.png"
+              alt="Global Modifier Information"
+            />
+            <span class="hidden">
+              When you use the '/i', case insensitive modifier, matches are made
+              without regard to case.
+            </span>
+          </span>
+        </div>
+        <label for="bracket">Pattern:</label>
+        <input type="text" class="pattern" />
+        <span class="new-line">
+          Enter the pattern as a string not as a regular expression literal.
+          That is, do NOT begin and end the pattern with a "/" forward slash.
+        </span>
+        <div class="center-contents">
+          <button
+            onclick="ApplyRegExp(document.querySelector('.pattern').value)"
+          >
+            Apply pattern
+          </button>
+        </div>
+      </aside>
+    </main>
   </body>
 </html>

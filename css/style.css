@@ -38,24 +38,23 @@ img {
   margin-left: 0.5rem;
 }
 
-span.image.experiment-button-information:hover::after {
-  content: "Click this button to experiment with regular expression patterns on target strings.";
+span.hover-information span {
+  padding-left: 0.5rem;
+  position: absolute;
+  background-color: darkkhaki;
+  padding: 0.3rem;
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+  border-radius: 1rem;
+  color: white;
+}
+
+span.hover-information img:hover + span {
+  display: inline-block;
 }
 
 span.image.pseudo-element-accessibility-information:hover::after {
-  content: "It is a bad idea to put content in a pseudo element as most screen readers will ignore it.";
-}
-
-span.image.global-modifier-information:hover::after {
-  content: "When you use the '/g', global modifier, all matches are returned. If not, only the first match is returned.";
-}
-
-span.image.case-insensitive-modifier-information:hover::after {
-  content: "When you use the '/i', case insensitive modifier, matches are made without regard to case.";
-}
-
-span.image.caret-symbol-assertion-information:hover::after {
-  content: "If the multiline flag, '/m', is used, then it also applies immediately <u> after </u> a line break. Note that the caret symbol, '^', means negation when used at the start of a range.";
+  content: "It is a bad idea to put content in a pseudo element like this as most screen readers will ignore it.  The rest of the information icons, like the one to the left, are handled in a more accessible way.";
 }
 
 .row {
@@ -72,6 +71,9 @@ span.image.caret-symbol-assertion-information:hover::after {
   font-size: larger;
   border-bottom: solid;
   margin-bottom: 1rem;
+  position: sticky;
+  top: 0;
+  background-color: white;
 }
 
 label,
@@ -102,7 +104,7 @@ li {
   color: red;
 }
 
-div.experiment textarea {
+aside.experiment textarea {
   width: 100%;
 }
 

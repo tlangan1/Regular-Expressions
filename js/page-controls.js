@@ -79,6 +79,9 @@ function onLoad(event) {
         "more_pages"
       ].value = false;
     }
+
+    // Tom L. (05-09-2022): Scolling issue: This does not work.
+    // window.scrollTo(0, 0);
   }
 
   function returnToggleExperiment() {
@@ -89,13 +92,13 @@ function onLoad(event) {
         visible = false;
       }
       if (visible) {
-        document.querySelector("div.experiment").attributes["class"].value +=
+        document.querySelector("aside.experiment").attributes["class"].value +=
           " hidden";
         document.querySelector("button.experiment").innerText = "Do Experiment";
       } else {
-        document.querySelector("div.experiment").attributes["class"].value =
+        document.querySelector("aside.experiment").attributes["class"].value =
           document
-            .querySelector("div.experiment")
+            .querySelector("aside.experiment")
             .attributes["class"].value.replace("hidden", "");
         document.querySelector("button.experiment").innerText =
           "Hide Experiment";
