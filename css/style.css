@@ -1,13 +1,13 @@
-.page:target {
+:root {
+  --nav-height: 50px;
+}
+
+.page {
+  display: none;
+}
+
+.page.visible {
   display: block;
-}
-
-.page:not(:target) {
-  display: none;
-}
-
-.initialize-page {
-  display: none;
 }
 
 .previous-page,
@@ -20,18 +20,6 @@
   pointer-events: none;
   text-decoration: none;
   color: black;
-}
-
-span.image:hover::after {
-  padding-left: 0.5rem;
-  position: absolute;
-  background-color: darkkhaki;
-  display: inline-block;
-  padding: 0.3rem;
-  margin-left: 0.2rem;
-  margin-right: 0.2rem;
-  border-radius: 1rem;
-  color: white;
 }
 
 img {
@@ -47,33 +35,11 @@ span.hover-information span {
   margin-right: 0.2rem;
   border-radius: 1rem;
   color: white;
+  z-index: 1;
 }
 
 span.hover-information img:hover + span {
   display: inline-block;
-}
-
-span.image.pseudo-element-accessibility-information:hover::after {
-  content: "It is a bad idea to put content in a pseudo element like this as most screen readers will ignore it.  The rest of the information icons, like the one to the left, are handled in a more accessible way.";
-}
-
-.row {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 0.5rem;
-}
-
-.row > * {
-  padding-right: 1rem;
-}
-
-.navigation {
-  font-size: larger;
-  border-bottom: solid;
-  margin-bottom: 1rem;
-  position: sticky;
-  top: 0;
-  background-color: white;
 }
 
 label,
@@ -85,11 +51,6 @@ textarea {
 
 li {
   padding-bottom: 0.5rem;
-}
-
-.center-container {
-  width: 20rem;
-  margin: 0 auto;
 }
 
 .center-contents {
@@ -110,4 +71,35 @@ aside.experiment textarea {
 
 .result {
   color: chocolate;
+  text-decoration: underline chocolate;
+}
+
+/* broader layout */
+nav {
+  font-size: larger;
+  left: 0;
+  width: 100vw;
+  height: var(--nav-height);
+  padding: 1rem;
+  border-bottom: solid;
+}
+
+article {
+  position: absolute;
+  height: calc(100% - var(--nav-height));
+  width: calc(100% - var(--aside-width));
+  /* margin-right: 275px; */
+  overflow: auto;
+  padding: 0 1rem;
+}
+
+aside {
+  margin-top: 50px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: calc(100% - var(--nav-height));
+  width: var(--aside-width);
+  overflow: auto;
+  padding: 1rem 0.5rem;
 }

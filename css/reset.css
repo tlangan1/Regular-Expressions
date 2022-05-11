@@ -1,0 +1,18 @@
+/* Standard resets */
+html {
+  --writing-mode: horizontal-tb;
+  --direction: ltr;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: Arial, sans-sarif;
+  margin: 0;
+  padding: 0;
+}

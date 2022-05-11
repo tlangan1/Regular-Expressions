@@ -9,13 +9,16 @@ addEventListener("load", onLoad);
 // This function gets executed when the web page loading this script finishes loading
 function onLoad(event) {
   var currentPageNumber = 1;
+  var aside_width = "275px";
+
+  var cssGlobalProperties = CSSProperties(document.querySelector(":root"));
+
+  cssGlobalProperties.setProperty("--aside-width", "0px");
 
   var pages = document.querySelectorAll("div.page");
 
   var numberPage = createNumberPageFunction();
   pages.forEach(numberPage);
-
-  document.querySelector(".initial-page").click();
 
   document
     .querySelector(".previous-page")
@@ -53,9 +56,11 @@ function onLoad(event) {
   }
 
   function onPreviousPageClick(event) {
+    document
+      .querySelector("#p" + currentPageNumber)
+      .classList.remove("visible");
     currentPageNumber -= 1;
-    document.querySelector(".next-page").href = "#p" + (currentPageNumber + 1);
-    document.querySelector(".previous-page").href = "#p" + currentPageNumber;
+    document.querySelector("#p" + currentPageNumber).classList.add("visible");
 
     document.querySelector(".next-page").attributes["more_pages"].value = true;
     if (!document.querySelector("#p" + (currentPageNumber - 1))) {
@@ -66,10 +71,12 @@ function onLoad(event) {
   }
 
   function onNextPageClick(event) {
+    document
+      .querySelector("#p" + currentPageNumber)
+      .classList.remove("visible");
     currentPageNumber += 1;
-    document.querySelector(".next-page").href = "#p" + currentPageNumber;
-    document.querySelector(".previous-page").href =
-      "#p" + (currentPageNumber - 1);
+    document.querySelector("#p" + currentPageNumber).classList.add("visible");
+    "#p" + (currentPageNumber - 1);
 
     document.querySelector(".previous-page").attributes[
       "more_pages"
@@ -79,9 +86,6 @@ function onLoad(event) {
         "more_pages"
       ].value = false;
     }
-
-    // Tom L. (05-09-2022): Scolling issue: This does not work.
-    // window.scrollTo(0, 0);
   }
 
   function returnToggleExperiment() {
@@ -94,7 +98,9 @@ function onLoad(event) {
       if (visible) {
         document.querySelector("aside.experiment").attributes["class"].value +=
           " hidden";
-        document.querySelector("button.experiment").innerText = "Do Experiment";
+        document.querySelector("button.experiment").innerText =
+          "Regex Experiment";
+        cssGlobalProperties.setProperty("--aside-width", "0px");
       } else {
         document.querySelector("aside.experiment").attributes["class"].value =
           document
@@ -102,11 +108,27 @@ function onLoad(event) {
             .attributes["class"].value.replace("hidden", "");
         document.querySelector("button.experiment").innerText =
           "Hide Experiment";
+        cssGlobalProperties.setProperty("--aside-width", aside_width);
       }
       visible = !visible;
     }
 
     return toggleExperiment;
+  }
+
+  function CSSProperties(element) {
+    function getProperty(propertyName) {
+      //   var rs = getComputedStyle(element);
+      return getComputedStyle(element).getPropertyValue(propertyName);
+    }
+    function setProperty(propertyName, propertyValue) {
+      element.style.setProperty(propertyName, propertyValue);
+    }
+
+    return {
+      getProperty: getProperty,
+      setProperty: setProperty,
+    };
   }
 
   function nonWordBoundaryExample(pattern) {

@@ -1,0 +1,22 @@
+nav {
+  font-size: larger;
+  left: 0;
+  width: 100vw;
+  height: 50px;
+}
+
+article {
+  position: absolute;
+  height: calc(100% - 50px);
+  width: calc(100% - 275px);
+  margin-right: 275px;
+  overflow: overlay;
+}
+
+aside {
+  margin-top: 50px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 275px;
+}

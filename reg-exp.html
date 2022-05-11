@@ -6,35 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
+    <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/page-controls.js"></script>
     <script src="js/reg-exp.js"></script>
   </head>
   <body>
-    <div class="row navigation">
-      <a href="#p1" class="initial-page"></a>
-      <a href="#p0" more_pages="false" class="previous-page">Previous Page</a>
-      <a href="#p1" more_pages="true" class="next-page">Next Page</a>
-      <button class="experiment">Do Experiment</button>
-      <span class="hover-information">
-        <img
-          src="images/information-icon.png"
-          alt="Experiment Button Information"
-        />
-        <span class="hidden">
-          Click this button to experiment with regular expression patterns on
-          target strings.
-        </span>
-      </span>
-      <span class="image pseudo-element-accessibility-information"
-        ><img
-          src="images/information-icon.png"
-          alt="Pseudo Element Accessibility Information"
-      /></span>
-    </div>
-    <main class="row">
+    <main>
+      <nav class="center-contents">
+        <button more_pages="false" class="previous-page">Previous Page</button>
+        <button more_pages="true" class="next-page">Next Page</button>
+        <button class="experiment">Regex Experiment</button>
+      </nav>
       <article>
-        <div class="page">
+        <div class="page visible">
           <h1>Page #<span class="page-number"></span>: Introduction</h1>
           <p>
             See
@@ -171,28 +156,26 @@
           </h1>
         </div>
       </article>
-      <aside class="center-container hidden experiment">
+      <aside class="hidden experiment">
         <div>
-          <label for="test-string-1">Test String 1:</label>
+          <label for="test-string-1">String 1:</label>
           <input type="text" id="test-string-1" />
-          <label for="test-result-1">Test Result 1:</label>
+          <label for="test-result-1">Result 1:</label>
           <span class="result" id="test-result-1"></span>
         </div>
         <div>
-          <label for="test-string-2">Test String 2:</label>
+          <label for="test-string-2">String 2:</label>
           <input type="text" id="test-string-2" />
-          <label for="test-result-2">Test Result 2:</label>
+          <label for="test-result-2">Result 2:</label>
           <span class="result" id="test-result-2"></span>
         </div>
         <div>
-          <label for="test-multi-line-string">Test Multi-line String:</label>
+          <label for="test-multi-line-string">Multi-line String:</label>
           <textarea rows="3" id="test-multi-line-string"></textarea>
-          <label for="test-multi-line-result">Test Multi-Line Result:</label>
+          <label for="test-multi-line-result">Multi-Line Result:</label>
           <span class="result" id="test-multi-line-result"></span>
         </div>
         <div>
-          <label for="global-match">Global Match:</label>
-          <input type="checkbox" id="global-match" />
           <span class="hover-information">
             <img
               src="images/information-icon.png"
@@ -203,10 +186,10 @@
               If not, only the first match is returned.
             </span>
           </span>
+          <label for="global-match">Global Match:</label>
+          <input type="checkbox" id="global-match" />
         </div>
         <div>
-          <label for="case-insensitive-match">Case Insensitive Match:</label>
-          <input type="checkbox" id="case-insensitive-match" />
           <span class="hover-information">
             <img
               src="images/information-icon.png"
@@ -217,6 +200,8 @@
               without regard to case.
             </span>
           </span>
+          <label for="case-insensitive-match">Case Insensitive Match:</label>
+          <input type="checkbox" id="case-insensitive-match" />
         </div>
         <label for="bracket">Pattern:</label>
         <input type="text" class="pattern" />
