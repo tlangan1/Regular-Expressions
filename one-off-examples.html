@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/reset.css" />
+
+    <style>
+      li {
+        background-color: lightcyan;
+      }
+
+      li:nth-child(2n) {
+        background-color: antiquewhite;
+      }
+
+      li p span {
+        background-color: aqua;
+      }
+
+      li:nth-child(2n) p span {
+        background-color: burlywood;
+      }
+    </style>
+
+    <script>
+      window.addEventListener("load", function () {
+        document.querySelectorAll("li").forEach(ApplyRegExpNew);
+
+        function ApplyRegExpNew(li, index) {
+          var matches = document
+            .querySelector("li:nth-child(" + (index + 1) + ") p")
+            .innerText.match(
+              RegExp(
+                document.querySelector(
+                  "li:nth-child(" + (index + 1) + ") span:nth-of-type(1)"
+                ).innerText,
+                "g"
+              )
+            );
+
+          var uniqueMatches = [...new Set(matches)];
+
+          var newHTML = uniqueMatches.reduce(function (result, item) {
+            return result.replaceAll(item, "<span>" + item + "</span>");
+          }, document.querySelector(
+            "li:nth-child(" + (index + 1) + ") p"
+          ).innerText);
+
+          document.querySelector(
+            "li:nth-child(" + (index + 1) + ") p"
+          ).innerHTML = newHTML;
+
+          document.querySelector(
+            "li:nth-child(" + (index + 1) + ") span.results"
+          ).innerText = " Results in: " + uniqueMatches;
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <ul>
+      <li>
+        <p>angel and angle elementary</p>
+        <span>e?le?</span>
+        <span class="results"></span>
+      </li>
+      <li>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac purus
+          dignissim, imperdiet dui sed, dignissim nunc. Sed faucibus turpis nec
+          ultricies tempus. Integer scelerisque neque nisi (test1), at volutpat
+          augue malesuada ut. Nam id venenatis urna. Suspendisse potenti.
+          Aliquam id sem sem. Suspendisse mollis nulla eu ex tempor, et
+          tincidunt risus condimentum. In non felis est. In ut tortor eget elit
+          faucibus volutpat eget (test (innertest 1) 2) vulputate quam. Sed erat
+          ex, consequat sed sapien vitae, porta pellentesque nulla. Etiam
+          molestie libero sed lacus (test3) feugiat, hendrerit tempus eros
+          interdum. Ut efficitur feugiat nunc, nec mattis risus ornare eget.
+          Phasellus quis malesuada diam. Quisque.
+        </p>
+        <span>([A-Z])\w+</span>
+        <span class="results"></span>
+      </li>
+
+      <li>
+        <p>doc|xls|pdf</p>
+        <span>[^|]+</span>
+        <span class="results"></span>
+      </li>
+      <li>
+        <p>doc|xls|pdf</p>
+        <span>[^c]+</span> Results in:
+        <span class="results"></span>
+      </li>
+    </ul>
+  </body>
+</html>

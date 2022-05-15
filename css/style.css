@@ -22,9 +22,9 @@
   color: black;
 }
 
-img {
+/* img {
   margin-left: 0.5rem;
-}
+} */
 
 span.hover-information span {
   padding-left: 0.5rem;
@@ -38,7 +38,7 @@ span.hover-information span {
   z-index: 1;
 }
 
-span.hover-information img:hover + span {
+span.hover-information:hover > span {
   display: inline-block;
 }
 

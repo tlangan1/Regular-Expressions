@@ -28,6 +28,12 @@
               href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions"
               >MDN</a
             >
+            and
+            <a
+              target="_blank"
+              href="https://www.regular-expressions.info/dot.html"
+              >regular-Expressions.info</a
+            >
             for information about regular expressions in JavaScript.
           </p>
         </div>
@@ -109,26 +115,43 @@
           <h1>Page #<span class="page-number"></span>: Quantifiers</h1>
           <ul>
             <li>
-              p+ matches any string containing one or more p's. p+ is equivalent
-              to p{1,}
+              x* matches the preceding
+              <span class="hover-information"
+                >item
+                <img
+                  src="images/information-icon.png"
+                  alt="Global Modifier Information"
+                />
+                <span class="hidden"
+                  >In this article, item refers not only to singular characters,
+                  but also includes character classes, Unicode property escapes,
+                  groups and ranges.</span
+                ></span
+              >
+              "x" 0 or more times. One might conclude that x* will match
+              everything because of the "zero" reference, but that is not the
+              case. The "zero" reference only makes sense in the context of a
+              larger item. "Zero" or more relative to a larger context.
             </li>
             <li>
-              p* matches any string containing zero or more p's. One might
-              conclude that p* will match everything because of the "zero"
-              reference, but that is not the case.
+              x+ matches the preceding item "x" 1 or more times. x+ is
+              equivalent to x{1,}
             </li>
-            <li>p? matches any string containing zero or one p's.</li>
-            <li>p{N} matches any string containing a sequence of N p's.</li>
+            <li>x? matches the preceding item "x" 0 or 1 times</li>
             <li>
-              p{N1, N2} matches any string containing a sequence of N1 or N2
-              p's.
+              x{n} where "n" is a positive integer, matches exactly "n"
+              occurrences of the preceding item "x".
             </li>
             <li>
-              p{N,} matches any string containing at least a sequence of N p's.
-              Note that the "," cannot be followed by any white space.
+              x{n,} where "n" is a positive integer, matches at least "n"
+              occurrences of the preceding item "x". Note that the "," cannot be
+              followed by any white space.
             </li>
-            <li>p$ matches any string containing p at the end of it.</li>
-            <li>^p matches any string containing p at the start of it.</li>
+            <li>
+              x{n, m} where "n" is 0 or a positive integer, "m" is a positive
+              integer, and m > n, matches at least "n" and at most "m"
+              occurrences of the preceding item "x".
+            </li>
           </ul>
         </div>
         <div class="page">
