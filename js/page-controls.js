@@ -139,6 +139,8 @@ function onLoad(event) {
       // I need to close over the same function object, toggleExperiment, here and in the addEventListener above
       // however, I need to override the toggle.  Regardless of which state it is in I need is to become visible.
       toggleExperiment(event, true);
+
+      ApplyRegExp(document.querySelector(".pattern").value);
     }
 
     return specificNonWordBoundaryExample;

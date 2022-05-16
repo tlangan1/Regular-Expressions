@@ -28,35 +28,68 @@
 
     <script>
       window.addEventListener("load", function () {
-        document.querySelectorAll("li").forEach(ApplyRegExpNew);
+        document.querySelectorAll("li").forEach(ApplyRegExp);
 
-        function ApplyRegExpNew(li, index) {
-          var matches = document
+        /*--------------------------------------------------*/
+        /* functions to support the executable code above   */
+        /*--------------------------------------------------*/
+        function ApplyRegExp(li, index) {
+          // Apply the regex and collect all the matches
+          //   var matches = document
+          //     .querySelector("li:nth-child(" + (index + 1) + ") p")
+          //     .innerText.match(
+          //       RegExp(
+          //         document.querySelector(
+          //           "li:nth-child(" + (index + 1) + ") span:nth-of-type(1)"
+          //         ).innerText,
+          //         "g"
+          //       )
+          //     );
+
+          //   var matchIndex = 0;
+
+          function buildIterateThroughMatches() {
+            var matchIndex = 0;
+
+            matches = document
+              .querySelector("li:nth-child(" + (index + 1) + ") p")
+              .innerText.match(
+                RegExp(
+                  document.querySelector(
+                    "li:nth-child(" + (index + 1) + ") span:nth-of-type(1)"
+                  ).innerText,
+                  "g"
+                )
+              );
+
+            function iterateThroughMatches() {
+              return "<span>" + matches[matchIndex++] + "</span>";
+            }
+
+            return iterateThroughMatches;
+          }
+
+          var newHTML = document
             .querySelector("li:nth-child(" + (index + 1) + ") p")
-            .innerText.match(
+            .innerText.replaceAll(
               RegExp(
                 document.querySelector(
                   "li:nth-child(" + (index + 1) + ") span:nth-of-type(1)"
                 ).innerText,
                 "g"
-              )
+              ),
+              buildIterateThroughMatches()
             );
 
-          var uniqueMatches = [...new Set(matches)];
-
-          var newHTML = uniqueMatches.reduce(function (result, item) {
-            return result.replaceAll(item, "<span>" + item + "</span>");
-          }, document.querySelector(
-            "li:nth-child(" + (index + 1) + ") p"
-          ).innerText);
-
+          // Replace the target string with this new string.  The spans are targeted
+          // by css to help make them apparent.
           document.querySelector(
             "li:nth-child(" + (index + 1) + ") p"
           ).innerHTML = newHTML;
 
           document.querySelector(
             "li:nth-child(" + (index + 1) + ") span.results"
-          ).innerText = " Results in: " + uniqueMatches;
+          ).innerHTML = " Results in the items: " + matches;
         }
       });
     </script>
@@ -70,11 +103,11 @@
       </li>
       <li>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac purus
-          dignissim, imperdiet dui sed, dignissim nunc. Sed faucibus turpis nec
-          ultricies tempus. Integer scelerisque neque nisi (test1), at volutpat
-          augue malesuada ut. Nam id venenatis urna. Suspendisse potenti.
-          Aliquam id sem sem. Suspendisse mollis nulla eu ex tempor, et
+          Lorem ipsum dolor sit amet, R12 consectetur adipiscing elit. Nam ac
+          purus dignissim, imperdiet dui sed, dignissim nunc. Sed faucibus
+          turpis nec ultricies tempus. Integer scelerisque neque nisi (test1),
+          at volutpat augue malesuada ut. Nam id venenatis urna. Suspendisse
+          potenti. Aliquam id sem sem. Suspendisse mollis nulla eu ex tempor, et
           tincidunt risus condimentum. In non felis est. In ut tortor eget elit
           faucibus volutpat eget (test (innertest 1) 2) vulputate quam. Sed erat
           ex, consequat sed sapien vitae, porta pellentesque nulla. Etiam
