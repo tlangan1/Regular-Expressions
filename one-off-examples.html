@@ -35,6 +35,24 @@
         /* functions to support the executable code above   */
         /*--------------------------------------------------*/
         function ApplyRegExp(li, index) {
+          // Collect the matches purely for display purposes
+          var matches = document
+            .querySelector("li:nth-child(" + (index + 1) + ") p")
+            .innerText.match(
+              RegExp(
+                document.querySelector(
+                  "li:nth-child(" + (index + 1) + ") span:nth-of-type(1)"
+                ).innerText,
+                "g"
+              )
+            );
+
+          // Display the matches
+          document.querySelector(
+            "li:nth-child(" + (index + 1) + ") span.results"
+          ).innerHTML = " Results in the items: " + matches;
+
+          // Create a string that wraps the matches in the target string with spans
           var newHTML = document
             .querySelector("li:nth-child(" + (index + 1) + ") p")
             .innerText.replaceAll(
@@ -47,25 +65,11 @@
               replacerFunction
             );
 
-          // Replace the target string with this new string.  The spans are targeted
-          // by css to help make them apparent.
+          // Replace the target string with this new string.
+          // The spans are targeted by css to help make them apparent.
           document.querySelector(
             "li:nth-child(" + (index + 1) + ") p"
           ).innerHTML = newHTML;
-          var matches = document
-            .querySelector("li:nth-child(" + (index + 1) + ") p")
-            .innerText.match(
-              RegExp(
-                document.querySelector(
-                  "li:nth-child(" + (index + 1) + ") span:nth-of-type(1)"
-                ).innerText,
-                "g"
-              )
-            );
-
-          document.querySelector(
-            "li:nth-child(" + (index + 1) + ") span.results"
-          ).innerHTML = " Results in the items: " + matches;
 
           /*--------------------------------------------------*/
           /* functions to support the executable code above   */
