@@ -27,6 +27,7 @@
     </style>
 
     <script>
+      "use strict";
       window.addEventListener("load", function () {
         document.querySelectorAll("li").forEach(ApplyRegExp);
 
@@ -34,41 +35,6 @@
         /* functions to support the executable code above   */
         /*--------------------------------------------------*/
         function ApplyRegExp(li, index) {
-          // Apply the regex and collect all the matches
-          //   var matches = document
-          //     .querySelector("li:nth-child(" + (index + 1) + ") p")
-          //     .innerText.match(
-          //       RegExp(
-          //         document.querySelector(
-          //           "li:nth-child(" + (index + 1) + ") span:nth-of-type(1)"
-          //         ).innerText,
-          //         "g"
-          //       )
-          //     );
-
-          //   var matchIndex = 0;
-
-          function buildIterateThroughMatches() {
-            var matchIndex = 0;
-
-            matches = document
-              .querySelector("li:nth-child(" + (index + 1) + ") p")
-              .innerText.match(
-                RegExp(
-                  document.querySelector(
-                    "li:nth-child(" + (index + 1) + ") span:nth-of-type(1)"
-                  ).innerText,
-                  "g"
-                )
-              );
-
-            function iterateThroughMatches() {
-              return "<span>" + matches[matchIndex++] + "</span>";
-            }
-
-            return iterateThroughMatches;
-          }
-
           var newHTML = document
             .querySelector("li:nth-child(" + (index + 1) + ") p")
             .innerText.replaceAll(
@@ -78,7 +44,7 @@
                 ).innerText,
                 "g"
               ),
-              buildIterateThroughMatches()
+              replacerFunction
             );
 
           // Replace the target string with this new string.  The spans are targeted
@@ -86,10 +52,27 @@
           document.querySelector(
             "li:nth-child(" + (index + 1) + ") p"
           ).innerHTML = newHTML;
+          var matches = document
+            .querySelector("li:nth-child(" + (index + 1) + ") p")
+            .innerText.match(
+              RegExp(
+                document.querySelector(
+                  "li:nth-child(" + (index + 1) + ") span:nth-of-type(1)"
+                ).innerText,
+                "g"
+              )
+            );
 
           document.querySelector(
             "li:nth-child(" + (index + 1) + ") span.results"
           ).innerHTML = " Results in the items: " + matches;
+
+          /*--------------------------------------------------*/
+          /* functions to support the executable code above   */
+          /*--------------------------------------------------*/
+          function replacerFunction(item) {
+            return "<span>" + item + "</span>";
+          }
         }
       });
     </script>
