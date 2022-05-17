@@ -22,10 +22,6 @@
   color: black;
 }
 
-/* img {
-  margin-left: 0.5rem;
-} */
-
 span.hover-information span {
   padding-left: 0.5rem;
   position: absolute;
@@ -82,6 +78,7 @@ nav {
   height: var(--nav-height);
   padding: 1rem;
   border-bottom: solid;
+  background-color: rgb(203, 240, 228);
 }
 
 article {
@@ -102,4 +99,21 @@ aside {
   width: var(--aside-width);
   overflow: auto;
   padding: 1rem 0.5rem;
+  background-color: antiquewhite;
+  border-left: solid;
+}
+
+/* Media queries */
+@media (max-width: 601px) {
+  aside {
+    position: relative;
+    width: auto;
+    margin-top: 0;
+    border-left: none;
+    border-bottom: solid;
+  }
+  article {
+    position: relative;
+    width: auto;
+  }
 }
