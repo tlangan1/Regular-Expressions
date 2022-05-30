@@ -2,6 +2,10 @@
   --nav-height: 50px;
 }
 
+.todo {
+  color: red;
+}
+
 .page {
   display: none;
 }
@@ -39,7 +43,7 @@ span.hover-information:hover > span {
 }
 
 label,
-span.new-line,
+span.result,
 textarea {
   display: inline-block;
   padding-bottom: 0.5rem;
@@ -57,7 +61,8 @@ li {
   display: none;
 }
 
-.warning {
+.warning,
+.error {
   color: red;
 }
 
@@ -65,9 +70,13 @@ aside.experiment textarea {
   width: 100%;
 }
 
-.result {
+span.result span {
   color: chocolate;
   text-decoration: underline chocolate;
+}
+
+span.highlight {
+  color: chocolate;
 }
 
 /* broader layout */
