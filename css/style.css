@@ -1,5 +1,6 @@
 :root {
   --nav-height: 50px;
+  --textarea-resizable: none;
 }
 
 .todo {
@@ -83,6 +84,14 @@ span.highlight {
   color: chocolate;
 }
 
+textarea {
+  resize: var(--textarea-resizable);
+}
+
+.title {
+  text-decoration: underline;
+}
+
 /* broader layout */
 nav {
   font-size: larger;
@@ -94,7 +103,7 @@ nav {
   background-color: rgb(203, 240, 228);
 }
 
-/* TODO: work with the placement of the SVGs */
+/* this places the info SVGs in a more appealing location...a little lower, more in line with the text */
 span > svg {
   margin: -3px;
 }
@@ -134,4 +143,12 @@ aside {
     position: relative;
     width: auto;
   }
+}
+
+/* This is for the resize experimentation on the first 'page' */
+.resize {
+  border: solid;
+  resize: vertical;
+  overflow: auto;
+  width: 80%;
 }

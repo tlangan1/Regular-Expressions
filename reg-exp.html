@@ -21,6 +21,9 @@
         <button class="experiment">Regex Experiment</button>
       </nav>
       <aside class="hidden experiment">
+        <div class="center-contents">
+          <span class="title"></span>
+        </div>
         <div>
           <label for="test-multi-line-string">String:</label>
           <textarea rows="3" id="test-multi-line-string"></textarea>
@@ -30,13 +33,17 @@
               alt="Pattern entry Information"
             />
             <span class="hidden">
+              Use SVG and here is why. Look at the other info icons to see the
+              difference between this one and them.
+              <br />
+              <br />
               Enter the pattern as a string not as a regular expression literal.
               That is, do NOT begin and end the pattern with a "/" forward
               slash.
             </span>
           </span>
-          <label for="pattern">Pattern:</label>
-          <textarea id="pattern"></textarea>
+          <label for="pattern">Pattern (with an ugly icon):</label>
+          <textarea rows="2" id="pattern"></textarea>
           <div class="center-contents">
             <button
               onclick="ApplyRegExp(document.querySelector('#pattern').value)"
@@ -50,7 +57,6 @@
         </div>
         <div>
           <span class="hover-information">
-            <!-- TODO: make the information icon with SVG -->
             <svg height="18" width="18">
               <circle
                 cx="9"
@@ -58,7 +64,7 @@
                 r="8"
                 stroke="darkkhaki"
                 stroke-width="1.5"
-                fill="rgb(203,240,228)"
+                fill="none"
               />
               <text
                 font-size="14"
@@ -83,7 +89,6 @@
         </div>
         <div>
           <span class="hover-information">
-            <!-- TODO: make the information icon with SVG -->
             <svg height="18" width="18">
               <circle
                 cx="9"
@@ -109,6 +114,33 @@
           </span>
           <label for="dot-all-match">dotAll Match:</label>
           <input type="checkbox" id="dot-all-match" />
+        </div>
+        <div>
+          <span class="hover-information">
+            <svg height="18" width="18">
+              <circle
+                cx="9"
+                cy="9"
+                r="8"
+                stroke="darkkhaki"
+                stroke-width="1.5"
+                fill="rgb(203,240,228)"
+              />
+              <text
+                font-size="14"
+                font-family="Times New Roman"
+                stroke="darkkhaki"
+                stroke-width="1"
+              >
+                <tspan x="7" y="14">i</tspan>
+              </text>
+            </svg>
+            <span class="hidden">
+              Allow resizing of the test string area and pattern area.
+            </span>
+          </span>
+          <label for="resizing-textareas">Allow resizing:</label>
+          <input type="checkbox" id="resizing-textareas" />
         </div>
       </aside>
       <article>
@@ -158,8 +190,13 @@
             search pattern in text.
           </p>
           <p>
-            TODO: How do you negate an entire regex? Does this even make sense?
-            I ran into
+            Is there a way to negate an entire regex?
+            <a
+              href="https://stackoverflow.com/questions/15337458/is-there-a-way-to-negate-a-regular-expression"
+              >Here</a
+            >
+            is a brief exchange that suggests that, for all practical purposes,
+            there is not.
             <a
               target="_blank"
               href="https://stackoverflow.com/questions/2637675/how-to-negate-the-whole-regex"
@@ -168,6 +205,21 @@
             but I am not sure it is entirey accurate. The highest weighted
             answer suggests the negative lookaround: (?!pattern).
           </p>
+          <div class="resize">
+            Note: I ran into the resize property when working with the string
+            and pattern textareas. It turns out that this property can be
+            applied to any element as stated
+            <a
+              target="_blank"
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/resize"
+              >here</a
+            >
+            . I should experiment with this. There is also some good information
+            <a
+              href="https://dev.to/dailydevtips1/making-divs-user-resizable-with-css-3ga"
+              >here</a
+            >.
+          </div>
         </div>
         <div class="page">
           <h1>Page #<span class="page-number"></span>: Assertions</h1>
@@ -324,7 +376,6 @@
               x* matches the preceding
               <span class="hover-information"
                 >item
-                <!-- TODO: make the information icon with SVG -->
                 <svg height="18" width="18">
                   <circle
                     cx="9"
@@ -375,7 +426,7 @@
             </li>
             <li class="todo">
               There is a need for information concerning greedy versus
-              non-greedy paterns in this section.
+              non-greedy patterns in this section.
             </li>
           </ul>
         </div>
@@ -383,8 +434,6 @@
           <h1>
             Page #<span class="page-number"></span>: Miscellaneous Examples
           </h1>
-          <!-- TODO: parameterize the descripions in the drop-down -->
-          <!-- TODO: put the description at the top of the "Experiment Panel" -->
           <select id="miscellaneous-regex">
             <option value="0" disabled selected hidden>
               Select an Example

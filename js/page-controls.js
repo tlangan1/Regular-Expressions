@@ -67,6 +67,10 @@ function onLoad(event) {
     .querySelector("#dot-all-match")
     .addEventListener("click", ApplyRegExp);
 
+  document
+    .querySelector("#resizing-textareas")
+    .addEventListener("click", toggleResizing);
+
   // --------------------------------------------------
   // The helper functions for the executable code above
 
@@ -164,6 +168,28 @@ function onLoad(event) {
     return toggleExperiment;
   }
 
+  function toggleResizing() {
+    if (cssGlobalProperties.getProperty("--textarea-resizable") == "vertical") {
+      cssGlobalProperties.setProperty("--textarea-resizable", "none");
+      // Here we are iterating, using forEach, over all the textareas in the experiment panel
+      // and calling the function returned from removeStyle which is closed over the style passed in.
+      // In this case it is the 'height'.
+      document
+        .querySelectorAll(".experiment textarea")
+        .forEach(removeStyle("height"));
+
+      function removeStyle(style) {
+        function removeSpecificStyle(element) {
+          element.style.removeProperty(style);
+        }
+
+        return removeSpecificStyle;
+      }
+    } else {
+      cssGlobalProperties.setProperty("--textarea-resizable", "vertical");
+    }
+  }
+
   function CSSProperties(element) {
     function getProperty(propertyName) {
       //   var rs = getComputedStyle(element);
@@ -181,7 +207,7 @@ function onLoad(event) {
 
   function nonWordBoundaryExample(pattern) {
     function specificNonWordBoundaryExample() {
-      clearTestString();
+      document.querySelector(".title").innerHTML = "Non-word Boundary Example.";
       document.querySelector("#test-multi-line-string").value =
         "The frog got some really bad advice from the badger!";
       document.querySelector("#pattern").value = pattern;
@@ -197,7 +223,9 @@ function onLoad(event) {
 
   function dotAllExample(pattern, dotAllFlag) {
     function specificDotAllExample() {
-      clearTestString();
+      if (dotAllFlag)
+        document.querySelector(".title").innerHTML = "Dot All Flag Set.";
+      else document.querySelector(".title").innerHTML = "Dot All Flag NOT Set.";
       document.querySelector("#test-multi-line-string").value =
         "This line is terminated\nbefore the sentance ends";
       document.querySelector("#pattern").value = pattern;
@@ -218,25 +246,30 @@ function onLoad(event) {
     var miscellaneousExamples = [
       // the null experiment
       {
+        title: "",
         string: "",
         pattern: "",
       },
       // identify all capitalized words
       {
+        title: "Capitalized words.",
         string: "The dog is home. maybe baby. Or is he? He is!",
         pattern: "[A-Z]\\w+",
       },
       // identify all sentances that are properly capitalized
       {
+        title: "Capitalized sentances.",
         string: "The dog is home. maybe baby. Or is he? He is!",
         pattern: "[A-Z][^.!?]*[.!?]",
       },
       {
         // identify sentances which are not capitalized.
+        title: "Un-capitalized sentances.",
         string: "the dog is home. Maybe baby. or is he? He is!",
         pattern: "((?<=[.!?]\\s+)[a-z]\\w+|^[a-z]\\w+)[^.!?]*[.!?]",
       },
       {
+        title: "Domain name candidates.",
         string: "site.com my.site.com frog again.my.site.com",
         pattern: "(\\w+\\.)+\\w+",
       },
@@ -244,7 +277,8 @@ function onLoad(event) {
 
     function example(event) {
       var number = event.currentTarget.value;
-      clearTestString();
+      document.querySelector(".title").innerHTML =
+        miscellaneousExamples[number].title;
       document.querySelector("#test-multi-line-string").value =
         miscellaneousExamples[number].string;
       document.querySelector("#pattern").value =
@@ -257,9 +291,5 @@ function onLoad(event) {
     }
 
     return example;
-  }
-
-  function clearTestString() {
-    document.querySelector("#test-multi-line-string").value = "";
   }
 }
