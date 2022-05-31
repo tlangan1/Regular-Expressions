@@ -1,25 +1,40 @@
 "use strict";
 
-// This line of code executes when the page the script is loaded
+// This line of code executes when the page is loaded
 addEventListener("load", onLoad);
 
-// -------------------------------------------------------------
+// --------------------------------------------------
 // The helper functions for the executable code above
+// --------------------------------------------------
 
 // This function gets executed when the web page loading this script finishes loading
 function onLoad(event) {
+  // --------------------------------------------------
+  // Initialize these local variables
+  // --------------------------------------------------
   var currentPageNumber = 1;
   var aside_width = "275px";
 
+  // --------------------------------------------------
+  // Initialize the CSS properties handler
+  // --------------------------------------------------
   var cssGlobalProperties = CSSProperties(document.querySelector(":root"));
 
+  // --------------------------------------------------
+  // Initialize the aside, the "experiment" panel, hidden
+  // --------------------------------------------------
   cssGlobalProperties.setProperty("--aside-width", "0px");
 
+  // --------------------------------------------------
+  // Number the pages
+  // --------------------------------------------------
   var pages = document.querySelectorAll("div.page");
-
   var numberPage = createNumberPageFunction();
   pages.forEach(numberPage);
 
+  // --------------------------------------------------
+  // Initialize the event handlers
+  // --------------------------------------------------
   document
     .querySelector(".previous-page")
     .addEventListener("click", onPreviousPageClick);
@@ -73,6 +88,8 @@ function onLoad(event) {
 
   // --------------------------------------------------
   // The helper functions for the executable code above
+  // Event handler functions
+  // --------------------------------------------------
 
   function createNumberPageFunction(page) {
     var pageNumber = 0;
@@ -190,21 +207,6 @@ function onLoad(event) {
     }
   }
 
-  function CSSProperties(element) {
-    function getProperty(propertyName) {
-      //   var rs = getComputedStyle(element);
-      return getComputedStyle(element).getPropertyValue(propertyName);
-    }
-    function setProperty(propertyName, propertyValue) {
-      element.style.setProperty(propertyName, propertyValue);
-    }
-
-    return {
-      getProperty: getProperty,
-      setProperty: setProperty,
-    };
-  }
-
   function nonWordBoundaryExample(pattern) {
     function specificNonWordBoundaryExample() {
       document.querySelector(".title").innerHTML = "Non-word Boundary Example.";
@@ -291,5 +293,21 @@ function onLoad(event) {
     }
 
     return example;
+  }
+
+  // Generic helper functions
+  // CSS Properties helper
+  function CSSProperties(element) {
+    function getProperty(propertyName) {
+      return getComputedStyle(element).getPropertyValue(propertyName);
+    }
+    function setProperty(propertyName, propertyValue) {
+      element.style.setProperty(propertyName, propertyValue);
+    }
+
+    return {
+      getProperty: getProperty,
+      setProperty: setProperty,
+    };
   }
 }
