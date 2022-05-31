@@ -56,20 +56,8 @@ function onLoad(event) {
     .addEventListener("click", dotAllExample(".", "s"));
 
   document
-    .querySelector("#capitalized-words")
-    .addEventListener("click", miscellaneousExample(1));
-
-  document
-    .querySelector("#capitalized-sentances")
-    .addEventListener("click", miscellaneousExample(2));
-
-  document
-    .querySelector("#uncapitalized-sentances")
-    .addEventListener("click", miscellaneousExample(3));
-
-  document
-    .querySelector("#domain-names")
-    .addEventListener("click", miscellaneousExample(4));
+    .querySelector("#miscellaneous-regex")
+    .addEventListener("change", miscellaneousExample());
 
   document
     .querySelector("#case-insensitive-match")
@@ -133,6 +121,14 @@ function onLoad(event) {
     currentPageNumber = document.querySelectorAll(".page").length;
     "#p" + (currentPageNumber - 1);
     document.querySelector("#p" + currentPageNumber).classList.add("visible");
+
+    //   disabled selected hidden
+    var option1 = document.querySelector(
+      "#miscellaneous-regex > option:first-child"
+    );
+    option1.disabled = true;
+    option1.selected = true;
+    option1.hidden = true;
 
     document.querySelector(".previous-page").attributes[
       "more_pages"
@@ -218,8 +214,13 @@ function onLoad(event) {
     return specificDotAllExample;
   }
 
-  function miscellaneousExample(number) {
+  function miscellaneousExample() {
     var miscellaneousExamples = [
+      // the null experiment
+      {
+        string: "",
+        pattern: "",
+      },
       // identify all capitalized words
       {
         string: "The dog is home. maybe baby. Or is he? He is!",
@@ -241,12 +242,13 @@ function onLoad(event) {
       },
     ];
 
-    function example() {
+    function example(event) {
+      var number = event.currentTarget.value;
       clearTestString();
       document.querySelector("#test-multi-line-string").value =
-        miscellaneousExamples[number - 1].string;
+        miscellaneousExamples[number].string;
       document.querySelector("#pattern").value =
-        miscellaneousExamples[number - 1].pattern;
+        miscellaneousExamples[number].pattern;
       // I need to close over the same function object, toggleExperiment, here and in the addEventListener above
       // however, I need to override the toggle.  Regardless of which state it is in I need is to become visible.
       toggleExperiment(event, true);

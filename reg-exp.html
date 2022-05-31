@@ -50,10 +50,29 @@
         </div>
         <div>
           <span class="hover-information">
-            <img
+            <!-- TODO: make the information icon with SVG -->
+            <svg height="18" width="18">
+              <circle
+                cx="9"
+                cy="9"
+                r="8"
+                stroke="darkkhaki"
+                stroke-width="1.5"
+                fill="rgb(203,240,228)"
+              />
+              <text
+                font-size="14"
+                font-family="Times New Roman"
+                stroke="darkkhaki"
+                stroke-width="1"
+              >
+                <tspan x="7" y="14">i</tspan>
+              </text>
+            </svg>
+            <!-- <img
               src="images/information-icon.png"
               alt="Case Insensitive Modifier Information"
-            />
+            /> -->
             <span class="hidden">
               When you use the '/i', case insensitive modifier, matches are made
               without regard to case.
@@ -64,10 +83,25 @@
         </div>
         <div>
           <span class="hover-information">
-            <img
-              src="images/information-icon.png"
-              alt="dotAll Modifier Information"
-            />
+            <!-- TODO: make the information icon with SVG -->
+            <svg height="18" width="18">
+              <circle
+                cx="9"
+                cy="9"
+                r="8"
+                stroke="darkkhaki"
+                stroke-width="1.5"
+                fill="none"
+              />
+              <text
+                font-size="14"
+                font-family="Times New Roman"
+                stroke="darkkhaki"
+                stroke-width="1"
+              >
+                <tspan x="7" y="14">i</tspan>
+              </text>
+            </svg>
             <span class="hidden">
               When you use the "/s", dotAll modifier, the dot also matches line
               terminators.
@@ -290,10 +324,25 @@
               x* matches the preceding
               <span class="hover-information"
                 >item
-                <img
-                  src="images/information-icon.png"
-                  alt="Item Information: TODO always place the information in the visible section in the alt"
-                />
+                <!-- TODO: make the information icon with SVG -->
+                <svg height="18" width="18">
+                  <circle
+                    cx="9"
+                    cy="9"
+                    r="8"
+                    stroke="darkkhaki"
+                    stroke-width="1.5"
+                    fill="none"
+                  />
+                  <text
+                    font-size="14"
+                    font-family="Times New Roman"
+                    stroke="darkkhaki"
+                    stroke-width="1"
+                  >
+                    <tspan x="7" y="14">i</tspan>
+                  </text>
+                </svg>
                 <span class="hidden"
                   >In this article, item refers not only to singular characters,
                   but also includes character classes, Unicode property escapes,
@@ -334,26 +383,17 @@
           <h1>
             Page #<span class="page-number"></span>: Miscellaneous Examples
           </h1>
-          <ul>
-            <!-- TODO: replace this list of buttons with a drop down box -->
-            <!-- TODO: parameterize the descripions in the drop-down -->
-            <li>
-              <button id="capitalized-words">Here</button> is an example of
-              identifying all capitalized words.
-            </li>
-            <li>
-              <button id="capitalized-sentances">Here</button> is an example of
-              identifying sentances whose first word is properly capitalized.
-            </li>
-            <li>
-              <button id="uncapitalized-sentances">Here</button> is an example
-              of identifying sentances whose first word is not capitalized.
-            </li>
-            <li>
-              <button id="domain-names">Here</button> is an example of
-              identifying domain names.
-            </li>
-          </ul>
+          <!-- TODO: parameterize the descripions in the drop-down -->
+          <!-- TODO: put the description at the top of the "Experiment Panel" -->
+          <select id="miscellaneous-regex">
+            <option value="0" disabled selected hidden>
+              Select an Example
+            </option>
+            <option value="1">All capitalized words</option>
+            <option value="2">Properly capitalized sentances</option>
+            <option value="3">Un-capitalized sentances</option>
+            <option value="4">Domain name candidates</option>
+          </select>
         </div>
       </article>
     </main>

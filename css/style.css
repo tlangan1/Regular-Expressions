@@ -42,6 +42,10 @@ span.hover-information:hover > span {
   display: inline-block;
 }
 
+span.hover-information:hover {
+  cursor: default;
+}
+
 label,
 span.result,
 textarea {
@@ -88,6 +92,11 @@ nav {
   padding: 1rem;
   border-bottom: solid;
   background-color: rgb(203, 240, 228);
+}
+
+/* TODO: work with the placement of the SVGs */
+span > svg {
+  margin: -3px;
 }
 
 article {
