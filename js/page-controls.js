@@ -43,9 +43,6 @@ function onLoad(event) {
     .querySelector(".next-page")
     .addEventListener("click", onNextPageClick);
 
-  var toggleExperiment = returnToggleExperiment();
-
-  // I need to close over the same function object, toggleExperiment, here and in nonWordBoundaryExample below
   document
     .querySelector("button.experiment")
     .addEventListener("click", toggleExperiment);
@@ -157,33 +154,36 @@ function onLoad(event) {
     document.querySelector(".next-page").attributes["more_pages"].value = false;
   }
 
-  function returnToggleExperiment() {
-    var visible = false;
+  //   function returnToggleExperiment() {
+  //     var visible = false;
 
-    function toggleExperiment(e, show) {
-      if (show) {
-        visible = false;
-      }
-      if (visible) {
-        document.querySelector("aside.experiment").attributes["class"].value +=
-          " hidden";
-        document.querySelector("button.experiment").innerText =
-          "Regex Experiment";
-        cssGlobalProperties.setProperty("--aside-width", "0px");
-      } else {
-        document.querySelector("aside.experiment").attributes["class"].value =
-          document
-            .querySelector("aside.experiment")
-            .attributes["class"].value.replace("hidden", "");
-        document.querySelector("button.experiment").innerText =
-          "Hide Experiment";
-        cssGlobalProperties.setProperty("--aside-width", aside_width);
-      }
-      visible = !visible;
+  function toggleExperiment(e, show) {
+    var visible = !document
+      .querySelector("aside.experiment")
+      .attributes["class"].value.includes("hidden");
+    if (show) {
+      visible = false;
     }
 
-    return toggleExperiment;
+    if (visible) {
+      document.querySelector("aside.experiment").attributes["class"].value +=
+        " hidden";
+      document.querySelector("button.experiment").innerText =
+        "Regex Experiment";
+      cssGlobalProperties.setProperty("--aside-width", "0px");
+    } else {
+      document.querySelector("aside.experiment").attributes["class"].value =
+        document
+          .querySelector("aside.experiment")
+          .attributes["class"].value.replace("hidden", "");
+      document.querySelector("button.experiment").innerText = "Hide Experiment";
+      cssGlobalProperties.setProperty("--aside-width", aside_width);
+    }
+    //   visible = !visible;
   }
+
+  //     return toggleExperiment;
+  //   }
 
   function toggleResizing() {
     if (cssGlobalProperties.getProperty("--textarea-resizable") == "vertical") {
@@ -209,12 +209,11 @@ function onLoad(event) {
 
   function nonWordBoundaryExample(pattern) {
     function specificNonWordBoundaryExample() {
-      document.querySelector(".title").innerHTML = "Non-word Boundary Example.";
+      document.querySelector(".title").innerHTML = "Non-word Boundary Example";
       document.querySelector("#test-multi-line-string").value =
         "The frog got some really bad advice from the badger!";
       document.querySelector("#pattern").value = pattern;
-      // I need to close over the same function object, toggleExperiment, here and in the addEventListener above
-      // however, I need to override the toggle.  Regardless of which state it is in I need is to become visible.
+      // Override the visibility toggle behavior by passing true as the second parameter.
       toggleExperiment(event, true);
 
       ApplyRegExp();
@@ -226,16 +225,15 @@ function onLoad(event) {
   function dotAllExample(pattern, dotAllFlag) {
     function specificDotAllExample() {
       if (dotAllFlag)
-        document.querySelector(".title").innerHTML = "Dot All Flag Set.";
-      else document.querySelector(".title").innerHTML = "Dot All Flag NOT Set.";
+        document.querySelector(".title").innerHTML = "Dot All Flag Set";
+      else document.querySelector(".title").innerHTML = "Dot All Flag NOT Set";
       document.querySelector("#test-multi-line-string").value =
         "This line is terminated\nbefore the sentance ends";
       document.querySelector("#pattern").value = pattern;
       if (dotAllFlag == "s")
         document.querySelector("#dot-all-match").checked = true;
       else document.querySelector("#dot-all-match").checked = false;
-      // I need to close over the same function object, toggleExperiment, here and in the addEventListener above
-      // however, I need to override the toggle.  Regardless of which state it is in I need is to become visible.
+      // Override the visibility toggle behavior by passing true as the second parameter.
       toggleExperiment(event, true);
 
       ApplyRegExp();
@@ -254,24 +252,24 @@ function onLoad(event) {
       },
       // identify all capitalized words
       {
-        title: "Capitalized words.",
+        title: "Capitalized words",
         string: "The dog is home. maybe baby. Or is he? He is!",
         pattern: "[A-Z]\\w+",
       },
       // identify all sentances that are properly capitalized
       {
-        title: "Capitalized sentances.",
+        title: "Capitalized sentances",
         string: "The dog is home. maybe baby. Or is he? He is!",
         pattern: "[A-Z][^.!?]*[.!?]",
       },
       {
         // identify sentances which are not capitalized.
-        title: "Un-capitalized sentances.",
+        title: "Un-capitalized sentances",
         string: "the dog is home. Maybe baby. or is he? He is!",
         pattern: "((?<=[.!?]\\s+)[a-z]\\w+|^[a-z]\\w+)[^.!?]*[.!?]",
       },
       {
-        title: "Domain name candidates.",
+        title: "Domain name candidates",
         string: "site.com my.site.com frog again.my.site.com",
         pattern: "(\\w+\\.)+\\w+",
       },
@@ -285,8 +283,7 @@ function onLoad(event) {
         miscellaneousExamples[number].string;
       document.querySelector("#pattern").value =
         miscellaneousExamples[number].pattern;
-      // I need to close over the same function object, toggleExperiment, here and in the addEventListener above
-      // however, I need to override the toggle.  Regardless of which state it is in I need is to become visible.
+      // Override the visibility toggle behavior by passing true as the second parameter.
       toggleExperiment(event, true);
 
       ApplyRegExp();

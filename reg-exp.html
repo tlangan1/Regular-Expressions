@@ -24,25 +24,36 @@
         <div class="center-contents">
           <span class="title"></span>
         </div>
+
         <div>
           <label for="test-multi-line-string">String:</label>
           <textarea rows="3" id="test-multi-line-string"></textarea>
           <span class="hover-information">
-            <img
-              src="images/information-icon.png"
-              alt="Pattern entry Information"
-            />
+            <svg height="18" width="18">
+              <circle
+                cx="9"
+                cy="9"
+                r="8"
+                stroke="darkkhaki"
+                stroke-width="1.5"
+                fill="none"
+              />
+              <text
+                font-size="14"
+                font-family="Times New Roman"
+                stroke="darkkhaki"
+                stroke-width="1"
+              >
+                <tspan x="7" y="14">i</tspan>
+              </text>
+            </svg>
             <span class="hidden">
-              Use SVG and here is why. Look at the other info icons to see the
-              difference between this one and them.
-              <br />
-              <br />
               Enter the pattern as a string not as a regular expression literal.
               That is, do NOT begin and end the pattern with a "/" forward
               slash.
             </span>
           </span>
-          <label for="pattern">Pattern (with an ugly icon):</label>
+          <label for="pattern">Pattern:</label>
           <textarea rows="2" id="pattern"></textarea>
           <div class="center-contents">
             <button
@@ -55,6 +66,9 @@
           <label for="test-multi-line-result">Result:</label>
           <span class="result" id="test-multi-line-result"></span>
         </div>
+        <hr />
+        <div class="center-contents"><span>Options</span></div>
+        <hr />
         <div>
           <span class="hover-information">
             <svg height="18" width="18">

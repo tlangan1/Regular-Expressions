@@ -88,8 +88,8 @@ textarea {
   resize: var(--textarea-resizable);
 }
 
-.title {
-  text-decoration: underline;
+.experiment-options {
+  border-top: solid;
 }
 
 /* broader layout */
