@@ -14,5 +14,7 @@ There are several canned examples of regular expressions sprinkled throughout th
 
 ## TODOs
 
+- Populate the miscellaneous examples drop-down from the title property of the array that defines the examples.
+- add default options to the examples data structure.
 - Enhance the application to allow the user to save their own regular expressions. Possibly use Web Storage API for this.
 - Replace the navigation section at the top with an MDN like structure

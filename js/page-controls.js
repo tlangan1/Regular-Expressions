@@ -273,6 +273,19 @@ function onLoad(event) {
         string: "site.com my.site.com frog again.my.site.com",
         pattern: "(\\w+\\.)+\\w+",
       },
+      {
+        title: "Parsing language patterns",
+        string: `
+The power of a gun can kill
+and the power of fire can burn
+the power of wind can chill
+and the power of a mind can learn
+the power of anger can rage
+inside until it tears u apart
+but the power of a smile
+especially yours can heal a frozen heart`,
+        pattern: "(?<=power of )(?<thing>(a )?\\w+).*?(?<= can )(?<verb>\\w+)",
+      },
     ];
 
     function example(event) {
