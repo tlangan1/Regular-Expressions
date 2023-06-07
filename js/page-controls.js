@@ -83,6 +83,60 @@ function onLoad(event) {
     .querySelector("#resizing-textareas")
     .addEventListener("click", toggleResizing);
 
+  // This needs to be assigned prior to the call to populateMiscRegexOptions
+  var miscellaneousExamples = [
+    // the null experiment
+    {
+      title: "",
+      string: "",
+      pattern: "",
+      switches: "",
+    },
+    // identify all capitalized words
+    {
+      title: "Capitalized words",
+      string: "The dog is home. maybe baby. Or is he? He is!",
+      pattern: "[A-Z]\\w+",
+      switches: "",
+    },
+    // identify all sentences that are properly capitalized
+    {
+      title: "Capitalized sentences",
+      string: "The dog is home. maybe baby. Or is he? He is!",
+      pattern: "[A-Z][^.!?]*[.!?]",
+      switches: "",
+    },
+    {
+      // identify sentences which are not capitalized.
+      title: "Un-capitalized sentences",
+      string: "the dog is home. Maybe baby. or is he? He is!",
+      pattern: "((?<=[.!?]\\s+)[a-z]\\w+|^[a-z]\\w+)[^.!?]*[.!?]",
+      switches: "",
+    },
+    {
+      title: "Domain name candidates",
+      string: "site.com my.site.com frog again.my.site.com",
+      pattern: "(\\w+\\.)+\\w+",
+      switches: "i",
+    },
+    {
+      title: "Parsing language patterns",
+      string: `Poem by Tupac Shakur:
+The power of a gun can kill
+and the power of fire can burn
+the power of wind can chill
+and the power of a mind can learn
+the power of anger can rage
+inside until it tears u apart
+but the power of a smile
+especially yours can heal a frozen heart`,
+      pattern: "(?<=power of )(?<thing>(a )?\\w+).*?(?<= can )(?<verb>\\w+)",
+      switches: "s",
+    },
+  ];
+
+  populateMiscRegexOptions();
+
   // --------------------------------------------------
   // The helper functions for the executable code above
   // Event handler functions
@@ -228,7 +282,7 @@ function onLoad(event) {
         document.querySelector(".title").innerHTML = "Dot All Flag Set";
       else document.querySelector(".title").innerHTML = "Dot All Flag NOT Set";
       document.querySelector("#test-multi-line-string").value =
-        "This line is terminated\nbefore the sentance ends";
+        "This line is terminated\nbefore the sentence ends";
       document.querySelector("#pattern").value = pattern;
       if (dotAllFlag == "s")
         document.querySelector("#dot-all-match").checked = true;
@@ -242,52 +296,24 @@ function onLoad(event) {
     return specificDotAllExample;
   }
 
-  function miscellaneousExample() {
-    var miscellaneousExamples = [
-      // the null experiment
-      {
-        title: "",
-        string: "",
-        pattern: "",
-      },
-      // identify all capitalized words
-      {
-        title: "Capitalized words",
-        string: "The dog is home. maybe baby. Or is he? He is!",
-        pattern: "[A-Z]\\w+",
-      },
-      // identify all sentances that are properly capitalized
-      {
-        title: "Capitalized sentances",
-        string: "The dog is home. maybe baby. Or is he? He is!",
-        pattern: "[A-Z][^.!?]*[.!?]",
-      },
-      {
-        // identify sentances which are not capitalized.
-        title: "Un-capitalized sentances",
-        string: "the dog is home. Maybe baby. or is he? He is!",
-        pattern: "((?<=[.!?]\\s+)[a-z]\\w+|^[a-z]\\w+)[^.!?]*[.!?]",
-      },
-      {
-        title: "Domain name candidates",
-        string: "site.com my.site.com frog again.my.site.com",
-        pattern: "(\\w+\\.)+\\w+",
-      },
-      {
-        title: "Parsing language patterns",
-        string: `
-The power of a gun can kill
-and the power of fire can burn
-the power of wind can chill
-and the power of a mind can learn
-the power of anger can rage
-inside until it tears u apart
-but the power of a smile
-especially yours can heal a frozen heart`,
-        pattern: "(?<=power of )(?<thing>(a )?\\w+).*?(?<= can )(?<verb>\\w+)",
-      },
-    ];
+  function populateMiscRegexOptions() {
+    var miscSelect = document.querySelector("#miscellaneous-regex");
+    var itemNumber = 0;
 
+    miscellaneousExamples.map(function addMiscRegexOption(v) {
+      if (itemNumber > 0) {
+        var opt = document.createElement("option");
+
+        opt.value = itemNumber;
+        opt.innerText = v.title;
+        miscSelect.appendChild(opt);
+        console.log(v.title);
+      }
+      itemNumber++;
+    });
+  }
+
+  function miscellaneousExample() {
     function example(event) {
       var number = event.currentTarget.value;
       document.querySelector(".title").innerHTML =
@@ -297,6 +323,10 @@ especially yours can heal a frozen heart`,
       document.querySelector("#pattern").value =
         miscellaneousExamples[number].pattern;
       // Override the visibility toggle behavior by passing true as the second parameter.
+      document.querySelector("#dot-all-match").checked =
+        miscellaneousExamples[number].switches.includes("s");
+      document.querySelector("#case-insensitive-match").checked =
+        miscellaneousExamples[number].switches.includes("i");
       toggleExperiment(event, true);
 
       ApplyRegExp();
