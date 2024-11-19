@@ -204,6 +204,18 @@
             search pattern in text.
           </p>
           <p>
+            As a regular expression "matches" a string it consumes that portion
+            of the string and removes it from consideration for further
+            matchings. For example, "abcde".match(/.../) will match, "abc" but
+            in doing so in consumes that portion of the string which just leaves
+            "de" which is not a match for "...". "abcde".match(/.../) will
+            match, "abc" and "def".
+            <span class="highlight"
+              >In both of these examples, "bcd" and "cde" where never considered
+              even though they are both three characters.</span
+            >
+          </p>
+          <p>
             Is there a way to negate an entire regex?
             <a
               href="https://stackoverflow.com/questions/15337458/is-there-a-way-to-negate-a-regular-expression"
@@ -251,7 +263,7 @@
             <li>
               "$" matches the end of input. The pattern to match must appear
               <u>before</u>
-              the caret symbol as in "a$".
+              the dollar sign symbol as in "a$".
               <p>
                 If the multiline flag, "/m", is used, then it also applies
                 immediately <u>before</u> a line break.
@@ -271,7 +283,7 @@
               be words, or both must be non-words.
               <p>
                 To be precise, \B[pattern] will require that the beginning of
-                the pattern be at a non-word boudary whereas [pattern]\B will
+                the pattern be at a non-word boundary whereas [pattern]\B will
                 require that the end of the pattern be at a non-word boundary.
                 Compare this example,
                 <button id="non-word-boundary-example-1">Example 1</button> to
@@ -294,6 +306,39 @@
             <li>
               Negative lookbehind assertion (?&lt;!y)x matches x only if x is
               not immediately preceded by y.
+            </li>
+            <li>
+              Sed ut perspiciatis, unde omnis iste natus error sit voluptatem
+              accusantium doloremque laudantium, totam rem aperiam eaque ipsa,
+              quae ab illo inventore veritatis et quasi architecto beatae vitae
+              dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas
+              sit, aspernatur aut odit aut fugit, sed quia consequuntur magni
+              dolores eos, qui ratione voluptatem sequi nesciunt, neque porro
+              quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur
+              adipisci[ng] velit, sed quia non numquam [do] eius modi tempora
+              inci[di]dunt, ut labore et dolore magnam aliquam quaerat
+              voluptatem. Ut enim ad minima veniam, quis nostrum[d]
+              exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid
+              ex ea commodi consequatur? [D]Quis autem vel eum i[r]ure
+              reprehenderit, qui in ea voluptate velit esse, quam nihil
+              molestiae consequatur, vel illum, qui dolorem eum fugiat, quo
+              voluptas nulla pariatur?
+            </li>
+            <li>
+              At vero eos et accusamus et iusto odio dignissimos ducimus, qui
+              blanditiis praesentium voluptatum deleniti atque corrupti, quos
+              dolores et quas molestias excepturi sint, obcaecati cupiditate non
+              provident, similique sunt in culpa, qui officia deserunt mollitia
+              animi, id est laborum et dolorum fuga. Et harum quidem reru[d]um
+              facilis est e[r]t expedita distinctio. Nam libero tempore, cum
+              soluta nobis est eligendi optio, cumque nihil impedit, quo minus
+              id, quod maxime placeat facere possimus, omnis voluptas assumenda
+              est, omnis dolor repellend[a]us. Temporibus autem quibusdam et aut
+              officiis debitis aut rerum necessitatibus saepe eveniet, ut et
+              voluptates repudiandae sint et molestiae non recusandae. Itaque
+              earum rerum hic tenetur a sapiente delectus, ut aut reiciendis
+              voluptatibus maiores alias consequatur aut perferendis doloribus
+              asperiores repellat.
             </li>
           </ul>
         </div>
