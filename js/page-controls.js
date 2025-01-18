@@ -106,6 +106,24 @@ function onLoad(event) {
       pattern: "[A-Z][^.!?]*[.!?]",
       switches: "",
     },
+    // password that requires at least one uppercase letter, one lowercase letter, one digit, and one space
+    {
+      title: "Password that requires...",
+      string: "Rage rage 1",
+      pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\s)[A-Za-z\\d\\s]{10,}$",
+      switches: "",
+      hover_text:
+        "This pattern requires at least one uppercase letter, one lowercase letter, one digit, and one space.",
+    },
+    // password that requires at least one uppercase letter, one lowercase letter, one digit and allows but does not require spaces
+    {
+      title: "Password that requires...",
+      string: "Rage rage 1",
+      pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d\\s]{10,}$",
+      switches: "",
+      hover_text:
+        "This pattern requires at least one uppercase letter, one lowercase letter, one digit and allows but does not require spaces.",
+    },
     {
       // identify sentences which are not capitalized.
       title: "Un-capitalized sentences",
@@ -307,7 +325,10 @@ especially yours can heal a frozen heart`,
         opt.value = itemNumber;
         opt.innerText = v.title;
         miscSelect.appendChild(opt);
-        console.log(v.title);
+        // console.log(v.title);
+        if (v.hover_text) {
+          opt.setAttribute("title", v.hover_text);
+        }
       }
       itemNumber++;
     });
